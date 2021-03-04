@@ -1,16 +1,20 @@
-# PruebahelisaWeb
+# Aplicación frontend consumo de Pokemon API
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+El proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
 
-## Development server
+## Instalación y ejecución
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ejecutar comando `npm install` para la instalación de las librerias requeridas
 
-## Librerias utilizadas
+Ejecutar `ng serve` para el despliegue de la aplicación
+
+Navegar a `http://localhost:4200/`. 
+
+## Librerias y componentes utilizados
 
 ng2-charts: paquete de directivas de Angular para Chart.js que utilice para la generación de gráficos
 
-ng-bootstrap_ biblioteca de componentes de Angular basadas en el Bootstrap original
+ng-bootstrap: biblioteca de componentes de Angular basadas en el Bootstrap original
 
 jQuery Fancybox: libreria para mostrar gif de loader en el momento de hacer peticiones a la API
 
