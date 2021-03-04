@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row">
+        <!-- Contenedor donde se iteran todos los pokemones registrados -->
+        <div class="col-sm-6" *ngFor="let pokemon of dataPokemon.pokemones" >
+            <!-- Contenedor por cada pokemon -->
+            <div class="card" #pokemons id="{{pokemon.typesConc}}"  (click)="getStatisticsEncountersPokemon(pokemon.id, pokemon.name, pokemon.imagenSvg , modalDetallePokemon)">
+                <!-- Cuerdo del contenedor -->
+                <div class="card-body">
+                    <!-- Nombre del pokemon -->
+                    <h3 class="card-title">{{ pokemon.name }} </h3>                 
+                    <div class="row">
+                        <!-- Información adicional del pokemon -->
+                        <div class="col-8">
+                            <p class="card-text">
+                                Heigth: {{ pokemon.height }}<br>
+                                Weigth: {{ pokemon.weight }}
+                            </p>
+                            Abilities: {{ pokemon.abilitiesConc }}
+                        </div>
+                        <!-- Imagén del pokemon -->
+                        <div class="col-4">
+                            <ng-container *ngIf="pokemon.imagenSvg ; else imagenDefecto ">
+                                <img src="{{ pokemon.imagenSvg }}"  class="imgPokemon">
+                            </ng-container>
+                            <ng-template #imagenDefecto>
+                                <img src="{{ pokemon.imagenDefect }}" class="imgPokemon">
+                            </ng-template>
+                        </div>
+                    </div>
+                    <!-- Tipos del pokemon -->
+                    <div class="botonCenter">
+                        <a *ngFor = "let types of pokemon.types" class="btn btn-primary">{{ types.name }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para mostrar la información del pokemon -->
+<ng-template #modalDetallePokemon let-c="close" let-d="dismiss" class="modal custom-class">
+    <!-- Cabecera del modal -->
+    <div class="modal-header">
+        <img src="../../../assets/images/pokebola.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <h4 class="modal-title" id="modal-basic-title"> {{nombrePokemon}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- Cuerpo de la modal -->
+    <div class="modal-body">
+        <div class="row">
+            <!-- Imagen del pokemon -->
+            <div class="col-4">
+                <img src="{{ imagenPokemon }}"  width="150px" height="150px">
+            </div>
+            <!-- Estadisticas del pokemon -->
+            <div class="col-8">
+                <h5>Statistics</h5>
+                <ng-container *ngIf="statisticsPokemon.length > 0 ; else mensajeEstadistica ">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Base Stat</th>
+                          <th scope="col">Current Rate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let statistic of statisticsPokemon">
+                                <td>
+                                    {{ statistic.name }}
+                                </td>
+                                <td>
+                                    {{ statistic.baseStat }}
+                                </td>
+                                <td>
+                                    <ngb-rating [(rate)]="statistic.currentRate"></ngb-rating>       
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </ng-container>
+                <ng-template #mensajeEstadistica>
+                    <p>No hay puntos de encuentro registrados para el pokemon {{nombrePokemon}}</p>
+                </ng-template>
+            </div>
+        </div>
+        <!-- Puntos de encuentro del pokemon -->
+        <h5>Encounters</h5>
+        <ng-container *ngIf="encountersPokemon.length > 0 ; else mensajeEncounter ">
+            <table class="table table-striped">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let encounter of encountersPokemon">
+                        <td>
+                            {{ encounter.name }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </ng-container>
+        <ng-template #mensajeEncounter>
+            <p>No hay puntos de encuentro registrados para el pokemon {{nombrePokemon}}</p>
+        </ng-template>
+    </div>
+</ng-template>
+
+    
